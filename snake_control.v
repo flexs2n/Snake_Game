@@ -46,7 +46,7 @@ module snake_control(
     reg [7:0] TargetX;
     reg [6:0] TargetY;
     generic_counter # (.COUNTER_WIDTH(23), .COUNTER_MAX(6249999)) 
-    STUPIDCLK (
+       CLK (
         .CLK(CLK),
         .RESET(1'b0),
         .ENABLE(1'b1),
