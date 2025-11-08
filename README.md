@@ -25,22 +25,21 @@ Hardware & tools
 
 Repository layout
 -----------------
-(Adjust this list to match the actual files in this repository.)
-- src/
-  - top.v                 — top-level module (instantiate VGA, game, inputs)
-  - vga_controller.v      — VGA timing and pixel coordinate generation
-  - snake_logic.v         — snake position, movement, growth, collision
-  - food_gen.v            — apple/food generation logic
-  - renderer.v            — draws snake, food and background to pixel stream
-  - score_display.v       — score digit rendering (optional)
-  - clock_gen.v           — clock divider / PLL/MMCM wrapper (pixel clock)
-- constraints/
-  - board_top.xdc         — pin assignments (VGA pins, buttons, LEDs)
-- sim/
-  - testbench.v           — optional simulation files
-- doc/
-  - schematics.md         — wiring notes (optional)
-- README.md               — this file
+MSM.v — likely a module (MSM)
+NSM.v — likely a module (NSM)
+NSM_Constraints.xdc — XDC constraints file (empty in the repo)
+NSM_TB.v — testbench for NSM (simulation)
+README.md — project README
+VGA_interface.v — VGA interface/timing or wrapper logic
+VGA_wrapper.v — wrapper around VGA interface or pixel pipeline
+decoder_2.v — decoder module
+generic_counter.v — generic counter module
+score_counter.v — score counter module
+snakeXDC.xdc — constraints / pin assignment XDC (large file)
+snake_control.v — snake game control logic
+snake_game_1.xpr — Xilinx project file
+target_gen.v — target/food generation module
+top.v — top-level module
 
 Build & flash (Vivado)
 ----------------------
