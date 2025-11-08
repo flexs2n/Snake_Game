@@ -75,47 +75,7 @@ The steps below assume you have Vivado installed and the project files are ready
    - Adjust the part number to the exact part for your board (check board docs).
    - Run: vivado -mode batch -source run_build.tcl
 
-Pin / constraints (.xdc)
-------------------------
-- You must adapt the .xdc to the exact board pinout. Typical signals:
-  - VGA: VGA_HS, VGA_VS, VGA_R[2:0], VGA_G[2:0], VGA_B[2:0]
-  - Buttons: BTN_UP, BTN_DOWN, BTN_LEFT, BTN_RIGHT, BTN_RESET
-  - Switches: optional difficulty / start
-  - LEDs: score or status
-- Example mapping (this is an example — DO NOT copy blindly; check board XDC):
-  ```xdc
-  set_property PACKAGE_PIN J15 [get_ports {VGA_R[2]}]  # example pin
-  set_property IOSTANDARD LVCMOS33 [get_ports {VGA_R[*] VGA_G[*] VGA_B[*] VGA_HS VGA_VS}]
-  set_property PACKAGE_PIN G14 [get_ports BTN_UP]
-  ```
-- If the design uses a pixel clock (25.175 MHz for 640×480@60), instantiate a clocking wizard or a divider from the board 100 MHz input. Using an MMCM is recommended for accurate timing.
 
-Controls & gameplay
--------------------
-- Movement: use four directional inputs (buttons, switches, or keyboard).
-- Reset / Start: dedicated button or switch to reset the game.
-- If keyboard (PS/2) support is included, plug in a PS/2 keyboard and use arrow keys.
-- Scoring: the score can be shown on VGA or LED indicators.
-- Goals: direct the snake to collect food (apple). Each food increases the snake length and score. Hitting walls or self results in game over.
-
-How to play
------------
-1. Power up the board and program the bitstream.
-2. Connect the VGA monitor.
-3. Press the Start button (if available) or toggle the Start switch.
-4. Use the movement controls to steer the snake.
-5. Eat food to grow and increase score. Avoid collisions.
-
-Testing & debugging tips
-------------------------
-- First verify VGA output with a simple test module that outputs a color bar or grid to confirm timing and pin mappings.
-- If the screen is black:
-  - Confirm the VGA HS/VS signals toggle.
-  - Verify pixel clock generation and timing parameters.
-  - Check the monitor supports the chosen mode.
-- Use onboard LEDs to output internal state (e.g., game running, collision detected).
-- Simulate critical modules (snake logic, renderer) with a simple testbench before synthesizing.
-- Use Vivado logic analyzer (ILA) for on-target signal inspection if needed.
 
 Contact
 -------
